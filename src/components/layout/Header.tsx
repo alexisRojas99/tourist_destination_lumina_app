@@ -30,7 +30,7 @@ export function Header() {
 
           <nav className="hidden md:flex items-center space-x-8">
             <Link
-              href="/"
+              href="/add-destination"
               className="text-gray-700 hover:text-blue-600 font-medium"
             >
               <Button
@@ -69,7 +69,7 @@ export function Header() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t">
               <Link
-                href="/"
+                href="/add-destination"
                 className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium"
               >
                 <Button

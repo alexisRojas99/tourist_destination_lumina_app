@@ -1,7 +1,6 @@
 import { Destination, DestinationFilters } from "../types";
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api/v1";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function getDestinations(
   filters: DestinationFilters = {}
@@ -70,10 +69,34 @@ export async function getDestinationById(
 
 export async function getFeaturedDestinations(): Promise<Destination[]> {
   try {
-    const destinations = await getDestinations({ limit: 6 });
-    return destinations.slice(0, 6);
+    const destinations = await getDestinations({ limit: 10 });
+    return destinations;
   } catch (error) {
     console.error("Error fetching featured destinations:", error);
     return [];
+  }
+}
+
+export async function createDestination(
+  destinationData: Omit<Destination, "id">
+): Promise<Destination | null> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/destinations`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(destinationData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const newDestination: Destination = await response.json();
+    return newDestination;
+  } catch (error) {
+    console.error("Error creating destination:", error);
+    return null;
   }
 }

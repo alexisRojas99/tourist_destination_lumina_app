@@ -51,7 +51,7 @@ export default async function DestinationPage({
           <div className="absolute inset-0" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl w-full mx-auto px-6 py-8">
           <div className="flex items-center justify-end mb-4">
             <div className="flex items-center space-x-4">
               <Button
