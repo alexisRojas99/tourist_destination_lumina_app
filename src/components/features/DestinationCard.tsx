@@ -1,13 +1,49 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Destination } from "../../types";
-import { Card, CardContent } from "../ui";
+import { Button, Card, CardContent } from "../ui";
+import { deleteDestination } from "../../lib/api";
 
 interface DestinationCardProps {
   destination: Destination;
+  onDelete?: (id: number) => void;
 }
 
-export function DestinationCard({ destination }: DestinationCardProps) {
+export function DestinationCard({
+  destination,
+  onDelete,
+}: DestinationCardProps) {
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const handleDelete = async () => {
+    if (
+      !confirm(`¿Estás seguro de que quieres eliminar "${destination.name}"?`)
+    ) {
+      return;
+    }
+
+    setIsDeleting(true);
+
+    try {
+      const success = await deleteDestination(destination.id);
+
+      if (success) {
+        if (onDelete) {
+          onDelete(destination.id);
+        }
+      } else {
+        alert("Error al eliminar el destino. Intenta nuevamente.");
+      }
+    } catch (error) {
+      console.error("Error deleting destination:", error);
+      alert("Error al eliminar el destino. Intenta nuevamente.");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 bg-white">
       <div className="relative h-48">
@@ -35,7 +71,7 @@ export function DestinationCard({ destination }: DestinationCardProps) {
           {destination.name}
         </h3>
 
-        <p className="text-sm text-gray-600 mb-3 line-clamp-3">
+        <p className="text-sm text-gray-600 mb-3 line-clamp-3 min-h-15">
           {destination.description}
         </p>
 
@@ -43,13 +79,23 @@ export function DestinationCard({ destination }: DestinationCardProps) {
           <p className="text-sm text-gray-500">{destination.address}</p>
         </div>
 
-        <div className="mt-4">
+        <div className="mt-4 text-center">
           <Link
             href={`/destinations/${destination.id}`}
-            className="w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors inline-block"
+            className="text-gray-700 text-center py-2 px-4 rounded-md transition-colors inline-block"
           >
             Ver más
           </Link>
+        </div>
+        <div className="mt-2">
+          <Button
+            variant="primary"
+            onClick={handleDelete}
+            disabled={isDeleting}
+            className="mt-2 w-full !bg-[#6a9fd5] hover:cursor-pointer text-white text-center py-2 px-4 rounded-md hover:!bg-blue-500 transition-colors inline-block disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isDeleting ? "Eliminando..." : "Eliminar"}
+          </Button>
         </div>
       </CardContent>
     </Card>

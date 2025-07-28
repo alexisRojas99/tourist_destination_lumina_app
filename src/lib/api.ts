@@ -100,3 +100,23 @@ export async function createDestination(
     return null;
   }
 }
+
+export async function deleteDestination(id: number): Promise<boolean> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/destinations/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Error deleting destination:", error);
+    return false;
+  }
+}

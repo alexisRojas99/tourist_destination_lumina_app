@@ -1,11 +1,39 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "../src/components/ui";
 import { DestinationCard } from "../src/components/features";
 import { getFeaturedDestinations } from "../src/lib";
+import { Destination } from "../src/types";
 import Image from "next/image";
 
-export default async function Home() {
-  const featuredDestinations = await getFeaturedDestinations();
+export default function Home() {
+  const [featuredDestinations, setFeaturedDestinations] = useState<
+    Destination[]
+  >([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadDestinations = async () => {
+      try {
+        const destinations = await getFeaturedDestinations();
+        setFeaturedDestinations(destinations);
+      } catch (error) {
+        console.error("Error loading destinations:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDestinations();
+  }, []);
+
+  const handleDestinationDelete = (deletedId: number) => {
+    setFeaturedDestinations((prev) =>
+      prev.filter((destination) => destination.id !== deletedId)
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -36,12 +64,22 @@ export default async function Home() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredDestinations.map((destination) => (
-              <DestinationCard key={destination.id} destination={destination} />
-            ))}
+            {loading ? (
+              <div className="col-span-full text-center py-12">
+                <p className="text-gray-500">Cargando destinos...</p>
+              </div>
+            ) : (
+              featuredDestinations.map((destination) => (
+                <DestinationCard
+                  key={destination.id}
+                  destination={destination}
+                  onDelete={handleDestinationDelete}
+                />
+              ))
+            )}
           </div>
 
-          {featuredDestinations.length === 0 && (
+          {!loading && featuredDestinations.length === 0 && (
             <div className="text-center py-12">
               <div className="text-gray-500 mb-4">
                 <svg
