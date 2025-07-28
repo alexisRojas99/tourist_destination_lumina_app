@@ -1,8 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tourist Destination Lumina App 🏝️
 
-## Getting Started
+A modern Next.js application for exploring and managing tourist destinations in El Salvador. Built with TypeScript, Tailwind CSS, and a modular architecture.
 
-First, run the development server:
+## 🚀 Features
+
+- Browse and discover tourist destinations
+- Add new destinations
+- Delete existing destinations
+- Responsive design optimized for all devices
+- Modern UI with El Salvador theming
+
+## 📋 Prerequisites
+
+Before running this application, make sure you have:
+
+- **Node.js** (version 18.0 or higher)
+- **npm**, **yarn**, **pnpm**, or **bun** package manager
+- **API Backend** running on `localhost:8000` (required for full functionality)
+
+## 🛠️ Installation & Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/alexisRojas99/tourist_destination_lumina_app.git
+cd tourist_destination_lumina_app
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+### 3. Environment Configuration
+
+Create a `.env` file in the root directory and add:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+```
+
+**Important:** Make sure your API backend is running on `localhost:8000` before starting the application.
+
+### 4. Run the development server
 
 ```bash
 npm run dev
@@ -14,23 +61,101 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 5. Open the application
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎯 Available Scripts
 
-## Learn More
+- `npm run dev` - Starts the development server
+- `npm run build` - Creates an optimized production build
+- `npm run start` - Starts the production server
+- `npm run lint` - Runs ESLint to check code quality
 
-To learn more about Next.js, take a look at the following resources:
+## 🏗️ Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+tourist_destination_lumina_app/
+├── app/                    # Next.js App Router pages
+│   ├── destinations/       # Destinations listing page
+│   ├── add-destination/   # Add destination form
+│   └── layout.tsx         # Root layout
+├── src/
+│   ├── components/        # Reusable components
+│   │   ├── ui/           # Basic UI components
+│   │   ├── layout/       # Layout components
+│   │   └── features/     # Feature-specific components
+│   ├── lib/              # Utilities and API functions
+│   └── types/            # TypeScript type definitions
+└── public/               # Static assets
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔧 Configuration
 
-## Deploy on Vercel
+### API Integration
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The app requires a backend API running on `localhost:8000`. The API should provide:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `GET /destinations` - Fetch destinations with optional filters
+- `POST /destinations` - Create new destinations
+- `DELETE /destinations/{id}` - Delete destinations
+
+### Environment Variables
+
+| Variable                   | Description                  | Required |
+| -------------------------- | ---------------------------- | -------- |
+| `NEXT_PUBLIC_API_BASE_URL` | Base URL for the API backend | Yes      |
+
+## 🛠️ Technologies Used
+
+- **Next.js 15.4.4** - React framework with App Router
+- **React 19.1.0** - UI library
+- **TypeScript** - Type safety and better development experience
+- **Tailwind CSS 4** - Utility-first CSS framework
+- **Lucide React** - Beautiful icons
+- **ESLint** - Code linting and quality
+
+## 🎨 Design Features
+
+- **Responsive Design** - Works perfectly on desktop, tablet, and mobile
+- **El Salvador Theme** - Custom colors and imagery representing El Salvador
+- **Modern UI** - Clean, intuitive interface with smooth interactions
+- **Accessibility** - Built with accessibility best practices
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+**1. API Connection Issues**
+
+- Ensure your backend API is running on `localhost:8000`
+- Check that the `.env` file is properly configured
+- Verify the API endpoints are accessible
+
+**2. Build Errors**
+
+- Clear the `.next` folder: `rm -rf .next`
+- Reinstall dependencies: `rm -rf node_modules && npm install`
+- Check for TypeScript errors: `npm run lint`
+
+**3. Environment Variables**
+
+- Make sure environment variables start with `NEXT_PUBLIC_` for client-side access
+- Restart the development server after changing environment variables
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/new-feature`
+3. Make your changes and commit: `git commit -m 'Add new feature'`
+4. Push to the branch: `git push origin feature/new-feature`
+5. Submit a pull request
+
+## 📄 License
+
+This project is private and proprietary.
+
+---
+
+Built with ❤️ for exploring the beautiful destinations of El Salvador by Alexis Rojas.
+Feel free to reach out for any questions or contributions!
