@@ -31,7 +31,7 @@ export function DestinationCard({ destination }: DestinationCardProps) {
       </div>
 
       <CardContent className="p-4">
-        <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2">
+        <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 mt-3">
           {destination.name}
         </h3>
 

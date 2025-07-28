@@ -38,79 +38,59 @@ export default async function DestinationPage({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="relative h-100 w-full">
-        <Image
-          fill
-          className="object-cover"
-          src={destination.imageUrl}
-          alt={destination.name}
-          priority
-        />
-        <div className="absolute inset-0" />
-        <div className="absolute bottom-6 left-6 text-white">
-          <h1 className="text-4xl font-bold mb-2">{destination.name}</h1>
-          <div className="flex items-center space-x-2">
-            <MapPin className="h-5 w-5" />
-            <span className="text-lg">{destination.address}</span>
-          </div>
+    <div className="bg-gray-50">
+      <div className="md:w-9/12 mx-auto md:p-10 md:mt-10 mb-20 bg-white rounded-2 flex flex-col items-center">
+        <div className="relative h-100 w-full">
+          <Image
+            fill
+            className="object-cover"
+            src={destination.imageUrl}
+            alt={destination.name}
+            priority
+          />
+          <div className="absolute inset-0" />
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="flex items-center justify-end mb-4">
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="none"
+                className="flex items-center space-x-2 text-gray-500 hover:cursor-pointer hover:bg-none"
+              >
+                <Heart className="h-5 w-5 hover:text-red-600 transition-colors" />
+                <span>{destination.likes}</span>
+              </Button>
+            </div>
+          </div>
+
+          <div className="text-center text-black">
+            <h1 className="text-4xl font-bold mb-2">{destination.name}</h1>
+            <div className="flex items-center space-x-2 justify-center mb-10">
+              <MapPin className="h-5 w-5" />
+              <span className="text-lg">{destination.address}</span>
+            </div>
+          </div>
+
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-4">
-                  <Button
-                    variant="ghost"
-                    className="flex items-center space-x-2 text-red-600 hover:bg-red-50"
-                  >
-                    <Heart className="h-5 w-5" />
-                    <span>{destination.likes} Me gusta</span>
-                  </Button>
-                </div>
-              </div>
-
-              <h2 className="text-2xl text-gray-500 font-bold mb-4">
-                Acerca de este destino
-              </h2>
+            <div className="p-6 mb-6">
               <p className="text-gray-700 leading-relaxed">
                 {destination.description}
               </p>
             </div>
           </div>
-
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-6">
-              <h3 className="text-xl text-gray-500 font-bold mb-4">
-                Información del destino
-              </h3>
-
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-2">
-                    Ubicación
-                  </h4>
-                  <p className="text-gray-600">{destination.address}</p>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-2">
-                    Popularidad
-                  </h4>
-                  <div className="flex items-center space-x-2">
-                    <Heart className="h-4 w-4 text-red-500" />
-                    <span className="text-gray-600">
-                      {destination.likes} personas les gusta esto
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
+      </div>
+
+      <div className="fixed w-full h-12 bottom-0">
+        <Image
+          src="/background-2.png"
+          alt="El Salvador Tourism Image"
+          className="w-full h-full object-cover"
+          width={1500}
+          height={50}
+          priority
+        />
       </div>
     </div>
   );
